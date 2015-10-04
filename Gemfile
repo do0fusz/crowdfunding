@@ -8,14 +8,17 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sass-rails', '~> 5.0.4' 
+
 # my gems 
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'font-awesome-sass-rails', '~> 3.0.2.2'
 gem 'devise'
+gem 'annotate'
+gem 'simple_form'
+gem 'bootstrap-wysihtml5-rails'
+
 
 gem 'sdoc', '~> 0.4.0', group: :doc
-
-
 
 group :development, :test do
   gem 'byebug'
