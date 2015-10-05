@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'projects#index'
   resources :projects do 
     resources :rewards, only: [:new, :create, :edit, :update, :destroy]
+    resources :pledges
   end
 
   devise_for :users

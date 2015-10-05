@@ -18,6 +18,7 @@
 class Project < ActiveRecord::Base
 	belongs_to :user 
 	has_many :rewards
+	has_many :plegdes
 
 	validates :name, :short_description, :description, :image_url, :expiration_date, :goal, presence: true 
 end

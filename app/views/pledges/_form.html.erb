@@ -1,0 +1,14 @@
+<%= simple_form_for @plegde, url: '#', method: :get do |f| %> 
+<h1>Allrighty!</h1>
+<h2>Enter your plegde ammount</h2>
+<fieldset><%= f.input :ammount, placeholder: "Enter your plegde ammount:", input_html: { value: @reward.try(:value), required: true } %> </fieldset>
+<br>
+<fieldset>
+	<legend>Select your reward</legend>
+	<%= f.collection_radio_buttons(:reward_id, @rewards, :id, :id, :checked => @reward.try(:id)) do |b| %>
+	<%= b.label(:"data-value" => b.value ) { b.radio_button + pledge_radio_button(b.object) } %>
+	<% end %>
+</fieldset>
+<%= f.submit "conitune to next step", class: "btn btn-success btn-md pull-right "%>
+<div class="clearfix"></div>
+<% end %> 
