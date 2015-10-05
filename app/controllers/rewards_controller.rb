@@ -1,9 +1,10 @@
 class RewardsController < ApplicationController
 		before_action :authenticate_user! 
-		before_action :set_project
+		before_action :set_project, only: [:new, :create, :edit, :update, :destroy]
+		before_action :set_reward, except: [:new, :create]
 
 		def new 
-			@rewards = @project.rewards.build 
+			@reward = @project.rewards.build 
 			respond_to do |format | 
 				format.html 
 			end
@@ -11,8 +12,13 @@ class RewardsController < ApplicationController
 		end
 
 		def create 
-			@rewards = @project.rewards.build 
-			if @rewards.save(project_params) 
+			@reward = @project.rewards.build(reward_params)
+			respond_to do | format |
+				if @reward.save 
+					format.html { redirect_to @project, notice: "Reward created" }
+				else 
+					format.html { render :new}
+				end
 			end
 		end
 
@@ -20,9 +26,20 @@ class RewardsController < ApplicationController
 		end
 
 		def update 
+			respond_to do |format| 
+				if @reward.update(reward_params)
+					format.html { redirect_to @project, notice: "Updated!" }
+				else
+					format.html { render :edit }
+				end
+			end
 		end
 
 		def destroy 
+			@reward.destroy 
+			respond_to do |format| 
+				format.html { redirect_to projects_path, notice: "Reward deleted"}
+			end
 		end
 
 		private 
@@ -30,5 +47,14 @@ class RewardsController < ApplicationController
 		def set_project 
 			@project = Project.find(params[:project_id])
 		end
+
+		def set_reward
+			@reward = @project.rewards.find(params[:id])
+		end
+
+		def reward_params
+			params.require(:reward).permit(:description, :value, :shipping, :number_available, :estimated_delivery)
+		end
+
 
 end

@@ -35,13 +35,16 @@
 </div>
 
 <div class="container">
+	
 	<div class="row">
 		<div class="col-md-8">
 			<h3 class="project-subtitle">Rewards</h3>
 			<p><%= @project.description %> </p>
 		</div>
-		<div class="col-m4-4">
+		<div class="col-md-4">
+			<p><%= render @rewards %></p>
 			<%= link_to "Add reward", new_project_reward_path(@project), class: "btn btn-primary" %> 
 		</div>
 	</div>
+
 </div>

@@ -10,7 +10,7 @@
 #  image_url         :string
 #  status            :string           default("pending")
 #  goal              :decimal(8, 2)
-#  experiation_date  :datetime
+#  expiration_date   :datetime
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #
@@ -19,5 +19,5 @@ class Project < ActiveRecord::Base
 	belongs_to :user 
 	has_many :rewards
 
-	validates :name, :short_descrioption, :description, :image_url, :expiration_date, :goal, presence: true 
+	validates :name, :short_description, :description, :image_url, :expiration_date, :goal, presence: true 
 end

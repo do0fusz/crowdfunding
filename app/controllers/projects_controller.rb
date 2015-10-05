@@ -8,6 +8,7 @@ class ProjectsController < ApplicationController
 	end
 
 	def show 
+		@rewards = @project.rewards
 	end
 
 
@@ -35,7 +36,7 @@ class ProjectsController < ApplicationController
 				format.html{ redirect_to @project, notice: "Project was created"}
 				format.json{ render :show, status: :ok, location: @project}
 			else 
-				format.html{ render 'new', notice: "Fill in the missing fields"}
+				format.html{ render :edit }
 				format.json{ render json: @project.errors, status: :unprocessable_entity }
 			end
 		end

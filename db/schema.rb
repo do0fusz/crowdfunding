@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151004153410) do
+ActiveRecord::Schema.define(version: 20151005113321) do
 
   create_table "projects", force: :cascade do |t|
     t.integer  "user_id"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20151004153410) do
     t.string   "image_url"
     t.string   "status",                                    default: "pending"
     t.decimal  "goal",              precision: 8, scale: 2
-    t.datetime "experiation_date"
+    t.datetime "expiration_date"
     t.datetime "created_at",                                                    null: false
     t.datetime "updated_at",                                                    null: false
   end
