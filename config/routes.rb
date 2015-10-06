@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :projects do 
     resources :rewards, only: [:new, :create, :edit, :update, :destroy]
     resources :pledges
+    resources :payments, only: [:new, :create]
   end
 
   devise_for :users

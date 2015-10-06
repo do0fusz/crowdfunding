@@ -1,4 +1,4 @@
-<%= simple_form_for @plegde, url: '#', method: :get do |f| %> 
+<%= simple_form_for @plegde, url: new_project_payment_path(@project), method: :get do |f| %> 
 <h1>Allrighty!</h1>
 <h2>Enter your plegde ammount</h2>
 <fieldset><%= f.input :ammount, placeholder: "Enter your plegde ammount:", input_html: { value: @reward.try(:value), required: true } %> </fieldset>
@@ -9,6 +9,6 @@
 	<%= b.label(:"data-value" => b.value ) { b.radio_button + pledge_radio_button(b.object) } %>
 	<% end %>
 </fieldset>
-<%= f.submit "conitune to next step", class: "btn btn-success btn-md pull-right "%>
+<%= f.submit "continue to next step", class: "btn btn-success btn-md pull-right "%>
 <div class="clearfix"></div>
 <% end %> 

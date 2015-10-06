@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151005123239) do
+ActiveRecord::Schema.define(version: 20151006090825) do
 
   create_table "pledges", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "reward_id"
-    t.integer  "ammount"
+    t.integer  "amount"
     t.decimal  "shipping"
     t.date     "expiration_date"
     t.string   "uuid"

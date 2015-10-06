@@ -17,8 +17,8 @@
 					<%= link_to 'Delete', project_path(@project), method: :delete, data: {confirm: "Are you shure? "} %> 
 				</div>
 					<%= render 'stats' %> 
-					<%= link_to 'See project backers', "#", class: "btn btn-success btn-lg" %> 
-					<br>
+
+					<%= link_to 'See project backers', project_pledges_path(@project), class: "btn btn-success btn-lg" %> 
 					<br>
 					<%= link_to 'Back this project', new_project_pledge_path(@project), class: "btn btn-success btn-lg" %> 
 					<p class="project-time"><%= time_ago_in_words(@project.created_at) %></p>

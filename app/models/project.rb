@@ -18,7 +18,11 @@
 class Project < ActiveRecord::Base
 	belongs_to :user 
 	has_many :rewards
-	has_many :plegdes
+	has_many :pledges
 
 	validates :name, :short_description, :description, :image_url, :expiration_date, :goal, presence: true 
+
+	def pledges
+		rewards.flat_map(&:pledges)
+	end
 end

@@ -4,7 +4,7 @@ class PledgesController < ApplicationController
 	before_action :set_reward 
 
 	def index 
-		@pledges = @project.pledegs 
+		@pledges = @project.pledges 
 		respond_to do | format | 
 			format.html
 		end
