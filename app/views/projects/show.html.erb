@@ -12,22 +12,27 @@
 				<%= link_to image_tag(@project.image_url, alt: @project.name, width: '100%'), project_path(@project) %> 
 			</div>
 			<div class="col-md-4">
+			<% if can? :manage, @project %>
 				<div class="project-mgmt">
 					<%= link_to 'Edit', edit_project_path(@project) %> 
 					<%= link_to 'Delete', project_path(@project), method: :delete, data: {confirm: "Are you shure? "} %> 
 				</div>
+			<% end %>
 					<%= render 'stats' %> 
-
+			<% if can? :manage, @project %>
 					<%= link_to 'See project backers', project_pledges_path(@project), class: "btn btn-success btn-lg" %> 
+			<% else %>
 					<br>
 					<%= link_to 'Back this project', new_project_pledge_path(@project), class: "btn btn-success btn-lg" %> 
+			<% end %>
 					<p class="project-time"><%= time_ago_in_words(@project.created_at) %></p>
+
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-md-8">
-				<p class="project-small-description"> Project small description</p>
+				<p class="project-small-description"><%= @project.short_description %></p>
 			</div>
 		</div>
 
@@ -43,7 +48,9 @@
 		</div>
 		<div class="col-md-4">
 			<p><%= render @rewards %></p>
+			<% if can? :manage, @project.rewards.build  %>
 			<%= link_to "Add reward", new_project_reward_path(@project), class: "btn btn-primary" %> 
+			<% end  %>
 		</div>
 	</div>
 
