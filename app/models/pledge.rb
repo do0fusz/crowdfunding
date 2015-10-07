@@ -24,14 +24,14 @@ class Pledge < ActiveRecord::Base
 	belongs_to :reward 
 
 	before_validation :generate_uuid!, :on => :create 
-	validates_presence_of :name, :address, :city, :country, :postal_code, :amount, :user_ids
+	validates_presence_of :name, :address, :city, :country, :postal_code, :amount, :user_id
 
 	private 
 	
 	def generate_uuid!
 		begin 
 			self.uuid = SecureRandom.hex(16)
-		end while Plegde.find_by(:uuid => self.uuid).prensent? 
+		end while Pledge.find_by(:uuid => self.uuid).present? 
 	end
 
 end

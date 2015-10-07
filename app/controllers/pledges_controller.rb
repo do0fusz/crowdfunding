@@ -12,7 +12,7 @@ class PledgesController < ApplicationController
 
 
 	def new
-		@plegde = current_user.pledges.build
+		@pledge = current_user.pledges.build
 		@rewards = @project.rewards 
 		respond_to do | format | 
 			format.html 

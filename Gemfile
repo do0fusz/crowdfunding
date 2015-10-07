@@ -23,6 +23,8 @@ end
 
 
 # my gems 
+gem 'awesome_print'
+gem 'pry'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'font-awesome-sass-rails', '~> 3.0.2.2'
 gem 'devise'

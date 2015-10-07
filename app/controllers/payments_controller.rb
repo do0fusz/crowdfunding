@@ -11,7 +11,7 @@ class PaymentsController < ApplicationController
 		@rewards = @project.rewards
 
 		respond_to do |format| 
-			if @reward && @amount.present? && reward.value <= @amount 
+			if @reward && @amount.present? && @reward.value <= @amount 
 				format.html 
 			else 
 				if @amount.present?
@@ -32,12 +32,13 @@ class PaymentsController < ApplicationController
 					@pledge.save 
 					format.html { redirect_to project_path(@project), notice:"Your pledge succeeded"}
 				else 
-					result = Braintree::Custromer.create(
+					result = Braintree::Customer.create(
 						:email => current_user.email, 
-						:paymen_method_nonce => params[:payment_method_nonce ])
+						:payment_method_nonce => params[:payment_method_nonce])
 						if result.success? 
+							# binding.pry
 							@pledge.save 
-							current_user.update(customer_id: result.customer_id)
+							current_user.update(customer_id: result.customer.id)
 							format.html { redirect_to project_path(@project), notice: "Your pledge was created" }
 						else 
 							format.html { render :new }
@@ -46,6 +47,7 @@ class PaymentsController < ApplicationController
 			else 
 				format.html{ render :new }
 			end
+		end
 	end
 
 	private 
@@ -64,11 +66,11 @@ class PaymentsController < ApplicationController
 	end
 
 	def set_client_token 
-		@client_token = Braintree::ClientToken.generate(:customer_id => current_user.custromer_id )
+		@client_token = Braintree::ClientToken.generate(:customer_id => current_user.customer_id )
 	end
 
 	def payment_params
-		params.require(:pledge).permit(:reward_id, :name, :amount, :address, :city, :country, :postal_code)
+		params.require(:pledge).permit(:reward_id, :name, :amount, :address, :city, :country, :postal_code, :customer_id)
 	end
 
 
