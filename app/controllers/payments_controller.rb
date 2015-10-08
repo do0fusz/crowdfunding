@@ -36,7 +36,6 @@ class PaymentsController < ApplicationController
 						:email => current_user.email, 
 						:payment_method_nonce => params[:payment_method_nonce])
 						if result.success? 
-							# binding.pry
 							@pledge.save 
 							current_user.update(customer_id: result.customer.id)
 							format.html { redirect_to project_path(@project), notice: "Your pledge was created" }

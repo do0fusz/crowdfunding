@@ -1,9 +1,30 @@
+# == Schema Information
+#
+# Table name: projects
+#
+#  id                :integer          not null, primary key
+#  user_id           :integer
+#  name              :string
+#  short_description :text
+#  description       :text
+#  image_url         :string
+#  status            :string           default("pending")
+#  goal              :decimal(8, 2)
+#  expiration_date   :datetime
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  slug              :string
+#
+
 class Project < ActiveRecord::Base
 	extend FriendlyId
 	friendly_id :slug_candidates, use: :slugged 
+	
 	belongs_to :user 
 	has_many :rewards
-	has_many :pledges
+	# don't the pledges belong to the Project? 
+	# has_many :pledges
+	
 	before_validation :start_project, on: :create 
 	validates :name, :short_description, :description, :image_url, :expiration_date, :goal, presence: true 
 	after_create :charge_backers_if_funded
@@ -14,6 +35,11 @@ class Project < ActiveRecord::Base
 
 	def total_backed_amount
 		pledges.map(&:amount).inject(0, :+ )
+	end
+
+	def funding_percentage
+		backed = total_backed_amount
+		backed.zero? ? 0 : (backed/goal*100).to_f.round
 	end
 
 	def funded? 
@@ -41,6 +67,11 @@ class Project < ActiveRecord::Base
 		update(status: "canceled")
 		void_pledges
 	end
+
+	def days_to_go 
+		(self.expiration_date.to_date - Date.today).to_i 
+	end
+
 
 	private 
 

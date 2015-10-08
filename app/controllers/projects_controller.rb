@@ -1,6 +1,8 @@
+
 class ProjectsController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :show]
 	before_action :set_project, only: [:show, :edit, :update, :destroy]
+	# before_action :set_pledges, only: [:show]
 	load_and_authorize_resource
 
 	def index
@@ -10,6 +12,8 @@ class ProjectsController < ApplicationController
 
 	def show 
 		@rewards = @project.rewards
+		@days_to_go = @project.days_to_go
+		@pledges = @project.pledges
 	end
 
 
@@ -65,5 +69,8 @@ class ProjectsController < ApplicationController
 			@project = Project.friendly.find(params[:id])
 		end
 
+		def set_pledges
+			@pledges = Project.pledges 
+		end
 
 end
